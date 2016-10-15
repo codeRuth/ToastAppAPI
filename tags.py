@@ -1,18 +1,14 @@
 def tags(publisher):
 	
-	if (publisher == "All Recipes"):
+	if publisher == "All Recipes":
 		tag = '//span[@class="recipe-directions__list--item"]/text()'
-	elif (publisher == "Back to Her Roots"):
+	elif publisher == "Back to Her Roots":
 		tag = '//li[@class="instruction"]/text()'
-	elif (publisher == "BBC Food"):
+	elif publisher == "BBC Food":
 		tag = '//p[@class="recipe-method__list-item-text"]/text()'
-	elif (publisher == "BBC Good Food"):
+	elif publisher == "BBC Good Food":
 		tag = ''
-
-
-
-
-	elif (publisher == "Bon Appetit"):
+	elif publisher == "Bon Appetit":
 		tag = '//div[@class="text" and @itemprop="recipeInstructions"]/text()'
 	# elif (publisher == "Bunky Cooks"):  membership
 	# 	tag = ''

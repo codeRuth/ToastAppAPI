@@ -1,30 +1,42 @@
-from lxml import html
 import requests
 import json
-from validity import valid
-# from flask import Flask
 
-class get_recipe(object):
-    def __init__(self, list, pg):
-        self.list = list
-        self.pg = pg
+API_KEY = 'a7117cb7dc7f8b768ec323b949e752dd'
+
+
+class getRecipe(object):
+    def __init__(self, ingredient, page):
+        self.list = ingredient
+        self.page = page
+
+    def is_valid(inp):
+        valid_publishers = ['All Recipes', 'Back to Her Roots', 'BBC Food', 'BBC Good Food', 'Bon Appetit',
+                            'Bunky Cooks', 'Chow', 'Closet Cooking', 'Cookin Canuck', 'Epicurious', 'Food Republic',
+                            'Framed Cooks', 'Healthy Delicious', 'Jamie Oliver', "Lisa's Kitchen"]
+        for i in range(len(valid_publishers)):
+            if inp == valid_publishers[i]:
+                return True
+        return False
+
     def return_recipe(self):
-        api_key='a7117cb7dc7f8b768ec323b949e752dd'
-        # for i in range(len(self.list)):
-        #     ingr = ingr+self.list[i]+','
-        # ingr = ingr[:-1]
         response = []
         num = 0
-        page = requests.get('http://food2fork.com/api/search?key='+api_key+'&q='+self.list+'&page='+str(self.pg))
+        page = requests.get('http://food2fork.com/api/search?key=' + API_KEY +
+                            '&q=' + self.list +
+                            '&page=' + str(self.page))
         parsed = json.loads(page.text)
         count = parsed['count']
-        for i in range(0,count):
-            if(valid(parsed['recipes'][i]['publisher'])):
-                temp  = json.dumps({'title':parsed['recipes'][i]['title'],'id':parsed['recipes'][i]['recipe_id']},separators=(',',':'))
+
+        for i in range(0, count):
+            if is_valid(parsed['recipes'][i]['publisher']):
+                temp = json.dumps({'title': parsed['recipes'][i]['title'],
+                                   'id': parsed['recipes'][i]['recipe_id']},
+                                  separators=(',', ':'))
                 response.append(temp)
-                num=num+1
-        return str(response).replace("'",'')
+                num += 1
+        return str(response).replace("'", '')
+
 
 if __name__ == '__main__':
-    obj = get_recipe("shredded chicken",1)
+    obj = getRecipe("shredded chicken", 1)
     obj.return_recipe()

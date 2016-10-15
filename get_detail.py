@@ -37,7 +37,7 @@ class getDetail(object):
             tree = html.fromstring(requests.get(parsed['recipe']['source_url']).content)
             directions = tree.xpath(tag)
             return {'status': 'true',
-                    "title": str(parsed['recipe']['title']),
+                    'title': parsed['recipe']['title'],
                     'image_url': parsed['recipe']['image_url'],
                     'ingredients': parsed['recipe']['ingredients'],
                     'direction': directions}

@@ -1,7 +1,6 @@
 import requests
 import json
-
-API_KEY = 'a7117cb7dc7f8b768ec323b949e752dd'
+import api_key
 
 
 class getRecipe(object):
@@ -11,8 +10,7 @@ class getRecipe(object):
 
     def return_recipe(self):
         response = []
-        num = 0
-        page = requests.get('http://food2fork.com/api/search?key=' + API_KEY +
+        page = requests.get('http://food2fork.com/api/search?key=' + api_key.API_KEY +
                             '&q=' + self.list +
                             '&page=' + str(self.page))
         parsed = json.loads(page.text)
@@ -36,7 +34,3 @@ def is_valid(inp):
         if inp == valid_publishers[i]:
             return True
     return False
-
-if __name__ == '__main__':
-    obj = getRecipe("shredded chicken", 1)
-    print obj.return_recipe()

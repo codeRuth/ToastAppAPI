@@ -1,13 +1,15 @@
 #!bin/python
 from flask import Flask, jsonify
 from get_recipe import getRecipe
+from get_detail import getDetail
 
 app = Flask(__name__)
 
 
 @app.route('/recipe/<int:id>', methods=['GET'])
 def get_recipe(recipe_id):
-    return recipe_id
+    obj = getDetail(recipe_id)
+    return jsonify(obj.return_detail())
 
 
 @app.route('/recipes/<string:ing>', methods=['GET'])

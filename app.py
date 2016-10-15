@@ -6,9 +6,9 @@ from get_detail import getDetail
 app = Flask(__name__)
 
 
-@app.route('/recipe/<int:id>', methods=['GET'])
-def get_recipe(id):
-    obj = getDetail(id)
+@app.route('/recipe/<string:recipe_id>', methods=['GET'])
+def get_recipe(recipe_id):
+    obj = getDetail(recipe_id)
     return jsonify(obj.return_detail())
 
 

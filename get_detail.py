@@ -23,7 +23,7 @@ class getDetail(object):
         self.id = id
 
     def return_detail(self):
-        page = requests.get('http://food2fork.com/api/get?key=' + api_key.API_KEY + '&rId=' + str(self.id))
+        page = requests.get('http://food2fork.com/api/get?key=' + api_key.API_KEY + '&rId=' + self.id)
         parsed = json.loads(page.text)
 
         if parsed['recipe']['publisher'] in publisher_tag:

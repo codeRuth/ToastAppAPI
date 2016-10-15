@@ -1,5 +1,6 @@
 *.pyc
-/bin
-/lib
-/local
-/share
+.idea/
+bin/
+lib/
+local/
+share/
